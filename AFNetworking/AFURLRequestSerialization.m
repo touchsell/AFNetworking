@@ -353,7 +353,7 @@ forHTTPHeaderField:(NSString *)field
     NSParameterAssert(method);
     NSParameterAssert(URLString);
 
-    NSURL *url = [NSURL URLWithString:URLString];
+    NSURL *url = [NSURL URLWithString:[URLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 
     NSParameterAssert(url);
 
