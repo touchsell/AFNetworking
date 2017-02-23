@@ -360,7 +360,7 @@ forHTTPHeaderField:(NSString *)field
     NSParameterAssert(method);
     NSParameterAssert(URLString);
 
-    NSURL *url = [NSURL URLWithString:URLString];
+    NSURL *url = [NSURL URLWithString:[URLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
 
     NSParameterAssert(url);
 
@@ -1263,11 +1263,11 @@ typedef enum {
         }
 
         NSData *jsonData = [NSJSONSerialization dataWithJSONObject:parameters options:self.writingOptions error:error];
-        
+
         if (!jsonData) {
             return nil;
         }
-        
+
         [mutableRequest setHTTPBody:jsonData];
     }
 
@@ -1348,11 +1348,11 @@ typedef enum {
         }
 
         NSData *plistData = [NSPropertyListSerialization dataWithPropertyList:parameters format:self.format options:self.writeOptions error:error];
-        
+
         if (!plistData) {
             return nil;
         }
-        
+
         [mutableRequest setHTTPBody:plistData];
     }
 
